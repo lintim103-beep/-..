@@ -196,24 +196,37 @@
         alert("【生存指南】\nWASD - 移動\n滑鼠 - 手電筒與瞄準\n左鍵 - 射擊/互動");
     }
 let audioCtx = null;
+let isPlaying = false;
+let timer = null;
 
 function toggleSound() {
     if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
     
-    // 建立發聲器與音量控制器
+    isPlaying = !isPlaying; // 切換開關狀態
+    
+    if (isPlaying) {
+        // 開啟：每 0.5 秒嗶一次
+        timer = setInterval(playBeep, 500);
+    } else {
+        // 關閉：清除定時器
+        clearInterval(timer);
+    }
+}
+
+function playBeep() {
     let osc = audioCtx.createOscillator();
     let gain = audioCtx.createGain();
     
-    osc.type = "sawtooth"; // 鋸齒波（警報聲質感）
-    osc.frequency.value = 880; // 聲音頻率
+    osc.type = "sawtooth";
+    osc.frequency.value = 880;
     
     osc.connect(gain);
     gain.connect(audioCtx.destination);
     
     osc.start();
-    osc.stop(audioCtx.currentTime + 0.3); // 發聲 0.3 秒後自動停止
+    osc.stop(audioCtx.currentTime + 0.15);
 }
 </script>
 
