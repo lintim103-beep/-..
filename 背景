@@ -178,19 +178,20 @@
 </div>
 
 <script>
-    function onStartClick() {
-        document.getElementById('alarm-sound').play();
+   function onStartClick() {
+        const sound = document.getElementById('alarm-sound');
+        sound.load();
+        sound.play();
         alert("【警報】防衛系統已開啟，進入 STATE_STORY（劇情對話狀態）...");
-    }
-
+}
     function onLoadClick() {
+        document.getElementById('alarm-sound').pause();
         alert("【打卡鐘紀錄】尚無存檔資料。");
     }
 
     function onControlsClick() {
         alert("【生存指南】\nWASD - 移動\n滑鼠 - 手電筒與瞄準\n左鍵 - 射擊/互動");
     }
-</script>
-<audio id="alarm-sound" loop src="[https://upload.wikimedia.org/wikipedia/commons/2/27/Alarm_or_siren.ogg]"></audio>
+<audio id="alarm-sound" loop src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"></audio>
 </body>
 </html>
