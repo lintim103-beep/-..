@@ -179,6 +179,7 @@
 
 <script>
     function onStartClick() {
+        document.getElementById('alarm-sound').play();
         alert("【警報】防衛系統已開啟，進入 STATE_STORY（劇情對話狀態）...");
     }
 
