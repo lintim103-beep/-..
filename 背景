@@ -204,8 +204,6 @@ alarmSound.loop = true;
         alarmSound.pause();
     }
 }
-}
-}
 
 </body>
 </html>
