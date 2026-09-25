@@ -183,7 +183,7 @@
 </div>
 
 <script>
-   const alarmSound = new Audio("https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg");
+   const alarmSound = new Audio("https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8c8a73467.mp3");
 alarmSound.loop = true;
    function onStartClick() {
         alert("【警報】防衛系統已開啟，進入 STATE_STORY（劇情對話狀態）...");
