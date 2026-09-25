@@ -190,6 +190,9 @@
     function onControlsClick() {
         alert("【生存指南】\nWASD - 移動\n滑鼠 - 手電筒與瞄準\n左鍵 - 射擊/互動");
     }
+   function toggleSound() {
+    alert("【音效開關】你點擊了音效按鈕！");
+}
 
 </body>
 </html>
