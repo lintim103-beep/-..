@@ -198,6 +198,9 @@
    function toggleSound() {
     alert("【音效開關】你點擊了音效按鈕！");
 }
+   function toggleSound() {
+    alarmSound.play();
+}
 
 </body>
 </html>
