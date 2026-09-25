@@ -169,7 +169,7 @@
         </div>
 
         <div class="menu-buttons">
-            <button id="sound-btn" onclick="toggleSound()"> 音效: 開</button>
+            <button class="menu-btn" onclick="toggleSound()"> 音效: 開</button>
             <button class="menu-btn" onclick="onStartClick()">進入遊戲</button>
             <button class="menu-btn" onclick="onLoadClick()">載入紀錄</button>
             <button class="menu-btn" onclick="onControlsClick()">操作指南</button>
@@ -196,11 +196,10 @@ alarmSound.loop = true;
     function onControlsClick() {
         alert("【生存指南】\nWASD - 移動\n滑鼠 - 手電筒與瞄準\n左鍵 - 射擊/互動");
     }
-   function toggleSound() {
-    alert("【音效開關】你點擊了音效按鈕！");
-}
-   function toggleSound() {
+   ffunction toggleSound() {
+    alarmSound.load();
     alarmSound.play();
+}
 }
 
 </body>
