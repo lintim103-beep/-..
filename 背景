@@ -11,7 +11,7 @@
         }
 
         body {
-            background-color: #0a0202;
+            background: radial-gradient(circle at center, #2b0404 0%, #080101 70%, #000000 100%);
             color: #ffffff;
             font-family: 'Courier New', Courier, monospace; /* 改用帶有復古電腦/文件感 Monospace 字體 */
             display: flex;
@@ -190,6 +190,6 @@
         alert("【生存指南】\nWASD - 移動\n滑鼠 - 手電筒與瞄準\n左鍵 - 射擊/互動");
     }
 </script>
-
+<audio id="alarm-sound" loop src="[https://upload.wikimedia.org/wikipedia/commons/2/27/Alarm_or_siren.ogg]"></audio>
 </body>
 </html>
