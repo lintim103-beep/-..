@@ -151,7 +151,6 @@
             letter-spacing: 2px;
             text-align: center;
         }
-        <button id="sound-btn" onclick="toggleSound()">🔊 音效: 開</button>
     </style>
 </head>
 <body>
@@ -166,6 +165,7 @@
         </div>
 
         <div class="menu-buttons">
+            <button id="sound-btn" onclick="toggleSound()">🔊 音效: 開</button>
             <button class="menu-btn" onclick="onStartClick()">進入遊戲</button>
             <button class="menu-btn" onclick="onLoadClick()">載入紀錄</button>
             <button class="menu-btn" onclick="onControlsClick()">操作指南</button>
