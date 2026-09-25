@@ -196,9 +196,14 @@ alarmSound.loop = true;
     function onControlsClick() {
         alert("【生存指南】\nWASD - 移動\n滑鼠 - 手電筒與瞄準\n左鍵 - 射擊/互動");
     }
-   function toggleSound() {
-    alarmSound.load();
-    alarmSound.play();
+  function toggleSound() {
+    if (alarmSound.paused) {
+        alarmSound.load();
+        alarmSound.play();
+    } else {
+        alarmSound.pause();
+    }
+}
 }
 }
 
