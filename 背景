@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Abyss Laboratory - Title Screen</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 遊戲主畫布外框*/
+        #game-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-color: #0d0d0e;
+            border: 2px solid #222;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+            overflow: hidden;
+        }
+
+        /* STATE_MENU 封面容器 */
+        #menu-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #1a0808 0%, #050505 90%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 20px;
+            z-index: 10;
+        }
+
+        /* 標題區塊 */
+        .title-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .main-title {
+            font-size: 52px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #e63946;
+            text-shadow: 0 0 15px rgba(230, 57, 70, 0.6), 0 0 30px rgba(0, 0, 0, 0.8);
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            letter-spacing: 6px;
+            color: #8a8a8a;
+            text-transform: uppercase;
+        }
+
+        /* 選單按鈕區塊 */
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 220px;
+        }
+
+        .menu-btn {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #cccccc;
+            background-color: rgba(20, 20, 20, 0.8);
+            border: 1px solid #444444;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .menu-btn:hover {
+            color: #ffffff;
+            background-color: #e63946;
+            border-color: #e63946;
+            box-shadow: 0 0 15px rgba(230, 57, 70, 0.8);
+            transform: translateY(-2px);
+        }
+
+        /* 底部資訊區塊 */
+        .footer-info {
+            font-size: 12px;
+            color: #555555;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <!-- STATE_MENU: 封面狀態 -->
+    <div id="menu-screen">
+        <div class="title-group">
+            <h1 class="main-title">ABYSS LABORATORY</h1>
+            <p class="subtitle">深淵實驗室</p>
+        </div>
+
+        <div class="menu-buttons">
+            <button class="menu-btn" onclick="onStartClick()">開始遊戲</button>
+            <button class="menu-btn" onclick="onLoadClick()">讀取進度</button>
+            <button class="menu-btn" onclick="onControlsClick()">操作說明</button>
+        </div>
+
+        <div class="footer-info">
+            18-Week Independent Learning Project | Version 0.1
+        </div>
+    </div>
+</div>
+
+<script>
+    // 按鈕點擊測試事件（未來連結至 STATE_STORY 或存檔系統）
+    function onStartClick() {
+        alert("點擊了「開始遊戲」！下一階段將進入劇情狀態 (STATE_STORY)。");
+    }
+
+    function onLoadClick() {
+        alert("點擊了「讀取進度」！（規劃於第 12 週實作 localStorage 讀取）");
+    }
+
+    function onControlsClick() {
+        alert("操作說明：\n[W][A][S][D] - 移動\n[滑鼠游標] - 瞄準方向\n[滑鼠左鍵] - 射擊 / 互動");
+    }
+</script>
+
+</body>
+</html>
