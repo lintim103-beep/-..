@@ -1,1 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Abyss Laboratory - Title Screen</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
+        body {
+            background: radial-gradient(circle at center, #2b0404 0%, #080101 70%, #000000 100%);
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace; /* 改用帶有復古電腦/文件感 Monospace 字體 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* 遊戲畫布框 */
+        #game-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-color: #050202;
+            border: 3px solid #300a0a;
+            box-shadow: 0 0 50px rgba(139, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        /* STATE_MENU: 暗黑血腥封面 */
+        #menu-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* 極深濃血色放射漸層 */
+            background: radial-gradient(circle at center, #2b0404 0%, #080101 70%, #000000 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px 20px;
+            z-index: 10;
+        }
+
+        /* 警報閃爍動畫 */
+        @keyframes alertPulse {
+            0% {
+                text-shadow: 0 0 10px #ff0000, 0 0 20px #8b0000;
+                opacity: 0.85;
+            }
+            50% {
+                text-shadow: 0 0 25px #ff0000, 0 0 50px #ff0000, 0 0 70px #8b0000;
+                opacity: 1;
+            }
+            100% {
+                text-shadow: 0 0 10px #ff0000, 0 0 20px #8b0000;
+                opacity: 0.85;
+            }
+        }
+
+        /* 警告警語呼吸燈 */
+        @keyframes warningFlicker {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.9; }
+        }
+
+        /* 標題區塊 */
+        .title-group {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .warning-tag {
+            color: #ff3333;
+            font-size: 13px;
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+            animation: warningFlicker 2s infinite;
+            font-weight: bold;
+        }
+
+        .main-title {
+            font-size: 54px;
+            font-weight: 900;
+            letter-spacing: 6px;
+            color: #ff1a1a;
+            animation: alertPulse 3s infinite ease-in-out;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #a3a3a3;
+            text-transform: uppercase;
+            border-top: 1px solid #5a1111;
+            border-bottom: 1px solid #5a1111;
+            padding: 6px 0;
+            margin-top: 10px;
+        }
+
+        /* 按鈕區塊 */
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            width: 240px;
+        }
+
+        .menu-btn {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: inherit;
+            color: #888888;
+            background-color: rgba(10, 2, 2, 0.85);
+            border: 1px solid #4a0e0e;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            letter-spacing: 3px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* 滑鼠移上去時的效果：像血光閃爍 */
+        .menu-btn:hover {
+            color: #ffffff;
+            background-color: #8b0000;
+            border-color: #ff0000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            transform: scale(1.03);
+        }
+
+        .menu-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* 底部警語 */
+        .footer-info {
+            font-size: 11px;
+            color: #442222;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+         /*音樂按鈕 */
+       #sound-btn {
+    background-color: rgba(10, 2, 2, 0.85);
+}
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+<!-- STATE_MENU: 恐怖恐怖風格封面 -->
+    <div id="menu-screen">
+        <div class="title-group">
+            <div class="warning-tag">▲ WARNING: BIOHAZARD CONTAINMENT BREACH ▲</div>
+            <h1 class="main-title">ABYSS LABORATORY</h1>
+
+        </div>
+
+        <div class="menu-buttons">
+            <button id="sound-btn" onclick="toggleSound()"> 音效: 開</button>
+            <button class="menu-btn" onclick="onStartClick()">進入遊戲</button>
+            <button class="menu-btn" onclick="onLoadClick()">載入紀錄</button>
+            <button class="menu-btn" onclick="onControlsClick()">操作指南</button>
+        </div>
+
+        <div class="footer-info">
+            SYSTEM STATUS: CRITICAL | B3 SECTOR LOCKED<br>
+            18-Week Project
+        </div>
+    </div>
+</div>
+
+<script>
+   const alarmSound = new Audio("https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg");
+alarmSound.loop = true;
+   function onStartClick() {
+        alert("【警報】防衛系統已開啟，進入 STATE_STORY（劇情對話狀態）...");
+}
+    function onLoadClick() {
+       
+        alert("【打卡鐘紀錄】尚無存檔資料。");
+    }
+
+    function onControlsClick() {
+        alert("【生存指南】\nWASD - 移動\n滑鼠 - 手電筒與瞄準\n左鍵 - 射擊/互動");
+    }
+   function toggleSound() {
+    alert("【音效開關】你點擊了音效按鈕！");
+}
+   function toggleSound() {
+    alarmSound.play();
+}
+
+</body>
+</html>
