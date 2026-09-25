@@ -114,7 +114,6 @@
     <div id="menu-screen">
         <div class="title-group">
             <h1 class="main-title">ABYSS LABORATORY</h1>
-            <p class="subtitle">深淵實驗室</p>
         </div>
 
         <div class="menu-buttons">
@@ -123,8 +122,7 @@
             <button class="menu-btn" onclick="onControlsClick()">操作說明</button>
         </div>
 
-        <div class="footer-info">
-            18-Week Independent Learning Project | Version 0.1
+
         </div>
     </div>
 </div>
