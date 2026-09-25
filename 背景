@@ -215,6 +215,7 @@ function toggleSound() {
     osc.start();
     osc.stop(audioCtx.currentTime + 0.3); // 發聲 0.3 秒後自動停止
 }
+</script>
 
 </body>
 </html>
