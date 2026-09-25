@@ -165,9 +165,9 @@
         </div>
 
         <div class="menu-buttons">
-            <button class="menu-btn" onclick="onStartClick()">進入設施</button>
+            <button class="menu-btn" onclick="onStartClick()">進入遊戲</button>
             <button class="menu-btn" onclick="onLoadClick()">載入紀錄</button>
-            <button class="menu-btn" onclick="onControlsClick()">生存指南</button>
+            <button class="menu-btn" onclick="onControlsClick()">操作指南</button>
         </div>
 
         <div class="footer-info">
