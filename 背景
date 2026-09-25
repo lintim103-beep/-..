@@ -183,8 +183,7 @@
 </div>
 
 <script>
-   const alarmSound = new Audio("https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8c8a73467.mp3");
-alarmSound.loop = true;
+
    function onStartClick() {
         alert("【警報】防衛系統已開啟，進入 STATE_STORY（劇情對話狀態）...");
 }
@@ -196,13 +195,25 @@ alarmSound.loop = true;
     function onControlsClick() {
         alert("【生存指南】\nWASD - 移動\n滑鼠 - 手電筒與瞄準\n左鍵 - 射擊/互動");
     }
-  function toggleSound() {
-    if (alarmSound.paused) {
-        alarmSound.load();
-        alarmSound.play();
-    } else {
-        alarmSound.pause();
+let audioCtx = null;
+
+function toggleSound() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
+    
+    // 建立發聲器與音量控制器
+    let osc = audioCtx.createOscillator();
+    let gain = audioCtx.createGain();
+    
+    osc.type = "sawtooth"; // 鋸齒波（警報聲質感）
+    osc.frequency.value = 880; // 聲音頻率
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.3); // 發聲 0.3 秒後自動停止
 }
 
 </body>
