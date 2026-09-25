@@ -151,6 +151,10 @@
             letter-spacing: 2px;
             text-align: center;
         }
+         /*音樂按鈕 */
+       #sound-btn {
+    background-color: rgba(10, 2, 2, 0.85);
+}
     </style>
 </head>
 <body>
