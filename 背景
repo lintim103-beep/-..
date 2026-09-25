@@ -11,7 +11,7 @@
         }
 
         body {
-            background-color: #000000;
+            background-color: #0a0202;
             color: #ffffff;
             font-family: 'Courier New', Courier, monospace; /* 改用帶有復古電腦/文件感 Monospace 字體 */
             display: flex;
@@ -156,7 +156,7 @@
 <body>
 
 <div id="game-container">
-    <!-- STATE_MENU: 恐怖恐怖風格封面 -->
+<!-- STATE_MENU: 恐怖恐怖風格封面 -->
     <div id="menu-screen">
         <div class="title-group">
             <div class="warning-tag">▲ WARNING: BIOHAZARD CONTAINMENT BREACH ▲</div>
