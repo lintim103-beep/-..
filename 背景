@@ -286,6 +286,28 @@ let player = {
     size: 15,    // 角色大小
     color: "#00ff00" // 戰術綠色
 };
+// 繪製遊戲畫面與特戰員
+function drawGame() {
+    let canvas = document.getElementById("game-canvas");
+    let ctx = canvas.getContext("2d");
+
+    // 1. 清空畫布（填滿夜視深綠底色）
+    ctx.fillStyle = "#050b05";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // 2. 畫特戰員的手電筒光束（戰術黃光）
+    ctx.fillStyle = "rgba(255, 255, 150, 0.25)";
+    ctx.beginPath();
+    ctx.arc(player.x + 40, player.y, 40, -Math.PI / 4, Math.PI / 4);
+    ctx.lineTo(player.x, player.y);
+    ctx.fill();
+
+    // 3. 畫特戰員本體（戰術綠色圓點）
+    ctx.fillStyle = player.color;
+    ctx.beginPath();
+    ctx.arc(player.x, player.y, player.size, 0, Math.PI * 2);
+    ctx.fill();
+}
 
 
 function toggleSound() {
@@ -321,7 +343,7 @@ function playBeep() {
     osc.stop(audioCtx.currentTime + 0.15);
 }
 
-
+  // 開頭劇情
 function typeWriter() {
     let fullText = storyLines[currentLineIndex];
     if (textIndex < fullText.length) {
@@ -330,6 +352,7 @@ function typeWriter() {
         setTimeout(typeWriter, 100);
     }
 }
+
 
 function nextSentence() {
     if (currentLineIndex < storyLines.length - 1) {
