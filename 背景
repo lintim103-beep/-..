@@ -378,6 +378,22 @@ function nextSentence() {
     }
 }
 
+// 移動
+window.addEventListener("keydown", function(event) {
+    // 判斷按下的按鍵並改變特戰員座標
+    if (event.key === "w" || event.key === "W" || event.key === "ArrowUp") {
+        player.y -= 5; // 向上走
+    } else if (event.key === "s" || event.key === "S" || event.key === "ArrowDown") {
+        player.y += 5; // 向下走
+    } else if (event.key === "a" || event.key === "A" || event.key === "ArrowLeft") {
+        player.x -= 5; // 向左走
+    } else if (event.key === "d" || event.key === "D" || event.key === "ArrowRight") {
+        player.x += 5; // 向右走
+    }
+
+    drawGame();
+});
+
 </script>
 
 </body>
