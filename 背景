@@ -200,9 +200,10 @@
 
 <script>
 
-   function onStartClick() {
+     function onStartClick() {
     document.getElementById("menu-screen").style.display = "none";
     document.getElementById("story-screen").style.display = "block";
+    typeWriter(); // 開啟打字機！
 }
     function onLoadClick() {
        
@@ -249,6 +250,15 @@ function playBeep() {
     
     osc.start();
     osc.stop(audioCtx.currentTime + 0.15);
+}
+
+
+function typeWriter() {
+    if (textIndex < fullText.length) {
+        document.getElementById("story-text").innerText = fullText.slice(0, textIndex + 1);
+        textIndex++;
+        setTimeout(typeWriter, 100);
+    }
 }
 </script>
 
