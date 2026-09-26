@@ -239,27 +239,19 @@
     </div>
 
 <div id="story-screen" style="display: none;" onclick="nextSentence()">
-    <!-- 1. 新增：場景畫面區域 -->
+    <!-- 1. 最上方：場景畫面區域 -->
     <div id="scene-box">
         <span class="scene-tag">[ 區域：B3 底層廢棄實驗室 ]</span>
     </div>
 
-    <!-- 2. 原本的對話框區域 -->
+    <!-- 2. 中間：對話框區域 -->
     <p id="story-text"></p>
-</div>
 
-<!-- STATE_STORY: 劇情對話畫面 -->
-   
-<div id="story-screen" style="display: none;" onclick="nextSentence()">
-    <p id="story-text"></p>
-</div>
-
-<!-- 選項區域 -->
-<div id="choices-box" style="display: none;">
-    <button class="choice-btn" onclick="chooseOption1()">1. 搜尋附近的實驗桌</button>
-    <button class="choice-btn" onclick="chooseOption2()">2. 試著推開生鏽的鐵門</button>
-</div>
-
+    <!-- 3. 最下方：抉擇選項區域 -->
+    <div id="choices-box" style="display: none;">
+        <button class="choice-btn" onclick="chooseOption1()">1. 搜尋附近的實驗桌</button>
+        <button class="choice-btn" onclick="chooseOption2()">2. 試著推開生鏽的鐵門</button>
+    </div>
 </div>
 
 <script>
