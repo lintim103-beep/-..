@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <title>Abyss Laboratory - Title Screen</title>
     <style>
-#story-screen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 40px;
-    color: #FFFFFF;
-    font-size: 20px;
-    line-height: 1.8;
-}
+       #story-screen {
+         position: absolute;
+          top: 0;
+          left: 0;
+        width: 100%;
+         height: 100%;
+         padding: 40px;
+       color: #FFFFFF;
+           font-size: 20px;
+          line-height: 1.8;
+        } 
         * {
             box-sizing: border-box;
             margin: 0;
@@ -176,12 +176,8 @@
         <div class="title-group">
             <div class="warning-tag">▲ WARNING: BIOHAZARD CONTAINMENT BREACH ▲</div>
             <h1 class="main-title">ABYSS LABORATORY</h1>
-
-        </div>
-       <!-- STATE_STORY: 劇情對話畫面（預設先隱藏） -->
-<div id="story-screen" style="display: none;">
-    <p>【系統紀錄】你睜開眼睛，四周是一片死寂的廢棄實驗室...</p>
-</div>
+  </div>
+        
 
         <div class="menu-buttons">
             <button id="sound-btn" class="menu-btn" onclick="toggleSound()">🔊 音效: 開</button>
@@ -195,6 +191,11 @@
             18-Week Project
         </div>
     </div>
+   <!-- STATE_STORY: 劇情對話畫面（獨立放在外面） -->
+    <div id="story-screen" style="display: none;">
+        <p>【系統紀錄】你睜開眼睛，四周是一片死寂的廢棄實驗室...</p>
+    </div>
+
 </div>
 
 <script>
