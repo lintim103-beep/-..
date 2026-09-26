@@ -167,6 +167,10 @@
             <h1 class="main-title">ABYSS LABORATORY</h1>
 
         </div>
+       <!-- STATE_STORY: 劇情對話畫面（預設先隱藏） -->
+<div id="story-screen" style="display: none;">
+    <p>【系統紀錄】你睜開眼睛，四周是一片死寂的廢棄實驗室...</p>
+</div>
 
         <div class="menu-buttons">
             <button id="sound-btn" class="menu-btn" onclick="toggleSound()">🔊 音效: 開</button>
