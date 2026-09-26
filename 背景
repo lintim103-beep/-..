@@ -215,6 +215,8 @@
 let audioCtx = null;
 let isPlaying = false;
 let timer = null;
+let fullText = "【系統紀錄】你睜開眼睛，四周是一片死寂的廢棄實驗室...";
+let textIndex = 0;
 
 function toggleSound() {
     if (!audioCtx) {
