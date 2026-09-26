@@ -1,5 +1,5 @@
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <title>Abyss Laboratory - Title Screen</title>
     <style>
        #story-screen {
