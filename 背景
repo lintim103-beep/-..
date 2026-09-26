@@ -239,10 +239,11 @@
     </div>
 
 <div id="story-screen" style="display: none;" onclick="nextSentence()">
-    <!-- 1. 最上方：場景畫面區域 -->
-    <div id="scene-box">
-        <span class="scene-tag">[ 區域：B3 底層廢棄實驗室 ]</span>
-    </div>
+
+
+   <!-- 1. 最上方：將 scene-box 替換為遊戲畫布 canvas -->
+    <canvas id="game-canvas" width="600" height="300"></canvas>
+    
 
     <!-- 2. 中間：對話框區域 -->
     <p id="story-text"></p>
