@@ -205,6 +205,7 @@ function toggleSound() {
     }
     
     isPlaying = !isPlaying; // 切換開關狀態
+    const soundBtn = document.getElementById("sound-btn");
     
     if (isPlaying) {
         // 開啟：每 0.5 秒嗶一次
