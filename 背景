@@ -169,7 +169,7 @@
         </div>
 
         <div class="menu-buttons">
-            <button class="menu-btn" onclick="toggleSound()"> 音效: 開</button>
+            <button id="sound-btn" class="menu-btn" onclick="toggleSound()">🔊 音效: 開</button>
             <button class="menu-btn" onclick="onStartClick()">進入遊戲</button>
             <button class="menu-btn" onclick="onLoadClick()">載入紀錄</button>
             <button class="menu-btn" onclick="onControlsClick()">操作指南</button>
@@ -209,9 +209,11 @@ function toggleSound() {
     if (isPlaying) {
         // 開啟：每 0.5 秒嗶一次
         timer = setInterval(playBeep, 500);
+        soundBtn.innerText = "🔊 音效: 開";
     } else {
         // 關閉：清除定時器
         clearInterval(timer);
+        soundBtn.innerText = "🔇 音效: 關";
     }
 }
 
