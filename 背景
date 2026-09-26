@@ -191,7 +191,26 @@
     100% { opacity: 1; }
 }
 
+.choice-btn {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px 20px;
+    background-color: rgba(0, 20, 0, 0.8);
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    font-family: monospace;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease-in-out;
+}
 
+.choice-btn:hover {
+    background-color: #00ff00;
+    color: #000000;
+    box-shadow: 0 0 10px #00ff00;
+}
 
     </style>
 </head>
