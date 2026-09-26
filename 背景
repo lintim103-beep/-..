@@ -166,6 +166,31 @@
        #sound-btn {
     background-color: rgba(10, 2, 2, 0.85);
 }
+
+#scene-box {
+    width: 100%;
+    height: 300px;
+    background-color: #050b05;
+    border: 2px solid #00ff00;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+}
+.scene-tag {
+    color: #00ff00;
+    font-family: monospace;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    animation: blink 1.5s infinite; /* 文字閃爍 */
+}
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
     </style>
 </head>
 <body>
@@ -191,7 +216,17 @@
             18-Week Project
         </div>
     </div>
-  
+
+<div id="story-screen" style="display: none;" onclick="nextSentence()">
+    <!-- 1. 新增：場景畫面區域 -->
+    <div id="scene-box">
+        <span class="scene-tag">[ 區域：B3 底層廢棄實驗室 ]</span>
+    </div>
+
+    <!-- 2. 原本的對話框區域 -->
+    <p id="story-text"></p>
+</div>
+
 <!-- STATE_STORY: 劇情對話畫面 -->
    
 <div id="story-screen" style="display: none;" onclick="nextSentence()">
