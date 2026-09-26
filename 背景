@@ -191,20 +191,22 @@
             18-Week Project
         </div>
     </div>
-   <!-- STATE_STORY: 劇情對話畫面 -->
-    <div id="story-screen" style="display: none;">
+  
+<!-- STATE_STORY: 劇情對話畫面 -->
+   
+<div id="story-screen" style="display: none;" onclick="nextSentence()">
     <p id="story-text"></p>
-       
-    </div>
+</div>
 
 </div>
 
 <script>
 
-     function onStartClick() {
+function onStartClick() {
     document.getElementById("menu-screen").style.display = "none";
     document.getElementById("story-screen").style.display = "block";
-    typeWriter(); // 開啟打字機！
+    textIndex = 0; // 歸零
+    typeWriter();
 }
     function onLoadClick() {
        
@@ -223,6 +225,7 @@ let storyLines = [
     "【未知聲音】『你...終於醒了嗎...？』"
 ];
 let currentLineIndex = 0;
+let textIndex = 0;
 
 
 function toggleSound() {
@@ -267,6 +270,17 @@ function typeWriter() {
         setTimeout(typeWriter, 100);
     }
 }
+
+function nextSentence() {
+    // 只有當還有下一句時，才切換到下一句
+    if (currentLineIndex < storyLines.length - 1) {
+        currentLineIndex++;
+        textIndex = 0; // 重置字數
+        document.getElementById("story-text").innerText = ""; // 先清空舊文字
+        typeWriter();
+    }
+}
+
 </script>
 
 </body>
