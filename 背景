@@ -309,6 +309,18 @@ function drawGame() {
     ctx.fill();
 }
 
+function onStartClick() {
+    // 隱藏選單、顯示故事畫面
+    document.getElementById("menu-screen").style.display = "none";
+    document.getElementById("story-screen").style.display = "block";
+    
+    // 新增這行：呼叫繪製函數，畫出特戰員！
+    drawGame();
+
+    // 開始打字機效果
+    typeWriter();
+}
+
 
 function toggleSound() {
     if (!audioCtx) {
