@@ -167,15 +167,12 @@
     background-color: rgba(10, 2, 2, 0.85);
 }
 
-#scene-box {
+#game-canvas {
     width: 100%;
     height: 300px;
     background-color: #050b05;
     border: 2px solid #00ff00;
     margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
 }
 .scene-tag {
@@ -239,27 +236,20 @@
     </div>
 
 <div id="story-screen" style="display: none;" onclick="nextSentence()">
-    <!-- 1. 新增：場景畫面區域 -->
-    <div id="scene-box">
-        <span class="scene-tag">[ 區域：B3 底層廢棄實驗室 ]</span>
+
+
+   <!-- 1. 最上方：將 scene-box 替換為遊戲畫布 canvas -->
+    <canvas id="game-canvas" width="600" height="300"></canvas>
+    
+
+    <!-- 2. 中間：對話框區域 -->
+    <p id="story-text"></p>
+
+    <!-- 3. 最下方：抉擇選項區域 -->
+    <div id="choices-box" style="display: none;">
+        <button class="choice-btn" onclick="chooseOption1()">1. 搜尋附近的實驗桌</button>
+        <button class="choice-btn" onclick="chooseOption2()">2. 試著推開生鏽的鐵門</button>
     </div>
-
-    <!-- 2. 原本的對話框區域 -->
-    <p id="story-text"></p>
-</div>
-
-<!-- STATE_STORY: 劇情對話畫面 -->
-   
-<div id="story-screen" style="display: none;" onclick="nextSentence()">
-    <p id="story-text"></p>
-</div>
-
-<!-- 選項區域 -->
-<div id="choices-box" style="display: none;">
-    <button class="choice-btn" onclick="chooseOption1()">1. 搜尋附近的實驗桌</button>
-    <button class="choice-btn" onclick="chooseOption2()">2. 試著推開生鏽的鐵門</button>
-</div>
-
 </div>
 
 <script>
@@ -288,6 +278,59 @@ let storyLines = [
 ];
 let currentLineIndex = 0;
 let textIndex = 0;
+
+// 特戰員主角資料設定
+let player = {
+    x: 300,      // 在畫布中央的 X 座標
+    y: 150,      // 在畫布中央的 Y 座標
+    size: 15,    // 角色大小
+    color: "#00ff00" // 戰術綠色
+};// 繪製遊戲畫面與特戰員（含戰術背心與頭盔外貌）
+function drawGame() {
+    let canvas = document.getElementById("game-canvas");
+    let ctx = canvas.getContext("2d");
+
+    // 1. 清空畫布（夜視深綠底色）
+    ctx.fillStyle = "#050b05";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // 2. 手電筒戰術光束（向前照亮）
+    ctx.fillStyle = "rgba(255, 255, 150, 0.25)";
+    ctx.beginPath();
+    ctx.arc(player.x + 40, player.y, 45, -Math.PI / 4, Math.PI / 4);
+    ctx.lineTo(player.x, player.y);
+    ctx.fill();
+
+    // 3. 特戰員身體：戰術背心 (暗灰色矩形)
+    ctx.fillStyle = "#2b322b";
+    ctx.fillRect(player.x - 10, player.y - 8, 20, 16);
+
+    // 4. 特戰員頭部：戰術頭盔 (軍綠色圓形)
+    ctx.fillStyle = "#1e3d1e";
+    ctx.beginPath();
+    ctx.arc(player.x, player.y, 8, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 5. 戰術護目鏡 / 夜視儀 (發光熒光綠點)
+    ctx.fillStyle = "#00ff00";
+    ctx.fillRect(player.x + 3, player.y - 3, 4, 6);
+
+    // 6. 手槍 / 手電筒握把
+    ctx.fillStyle = "#111111";
+    ctx.fillRect(player.x + 8, player.y - 2, 6, 4);
+}
+
+function onStartClick() {
+    // 隱藏選單、顯示故事畫面
+    document.getElementById("menu-screen").style.display = "none";
+    document.getElementById("story-screen").style.display = "block";
+    
+    // 新增這行：呼叫繪製函數，畫出特戰員！
+    drawGame();
+
+    // 開始打字機效果
+    typeWriter();
+}
 
 
 function toggleSound() {
@@ -323,7 +366,7 @@ function playBeep() {
     osc.stop(audioCtx.currentTime + 0.15);
 }
 
-
+  // 開頭劇情
 function typeWriter() {
     let fullText = storyLines[currentLineIndex];
     if (textIndex < fullText.length) {
@@ -332,6 +375,7 @@ function typeWriter() {
         setTimeout(typeWriter, 100);
     }
 }
+
 
 function nextSentence() {
     if (currentLineIndex < storyLines.length - 1) {
@@ -344,6 +388,22 @@ function nextSentence() {
         document.getElementById("choices-box").style.display = "block";
     }
 }
+
+// 移動
+window.addEventListener("keydown", function(event) {
+    // 判斷按下的按鍵並改變特戰員座標
+    if (event.key === "w" || event.key === "W" || event.key === "ArrowUp") {
+        player.y -= 5; // 向上走
+    } else if (event.key === "s" || event.key === "S" || event.key === "ArrowDown") {
+        player.y += 5; // 向下走
+    } else if (event.key === "a" || event.key === "A" || event.key === "ArrowLeft") {
+        player.x -= 5; // 向左走
+    } else if (event.key === "d" || event.key === "D" || event.key === "ArrowRight") {
+        player.x += 5; // 向右走
+    }
+
+    drawGame();
+});
 
 </script>
 
