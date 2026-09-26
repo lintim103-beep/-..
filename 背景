@@ -191,9 +191,10 @@
             18-Week Project
         </div>
     </div>
-   <!-- STATE_STORY: 劇情對話畫面（獨立放在外面） -->
+   <!-- STATE_STORY: 劇情對話畫面 -->
     <div id="story-screen" style="display: none;">
-        <p>【系統紀錄】你睜開眼睛，四周是一片死寂的廢棄實驗室...</p>
+    <p id="story-text"></p>
+       
     </div>
 
 </div>
@@ -216,8 +217,13 @@
 let audioCtx = null;
 let isPlaying = false;
 let timer = null;
-let fullText = "【系統紀錄】你睜開眼睛，四周是一片死寂的廢棄實驗室...";
-let textIndex = 0;
+let storyLines = [
+    "【系統紀錄】你睜開眼睛，四周是一片死寂的廢棄實驗室...",
+    "【警報系統】警告：三號隔離區生化防護已失效！",
+    "【未知聲音】『你...終於醒了嗎...？』"
+];
+let currentLineIndex = 0;
+
 
 function toggleSound() {
     if (!audioCtx) {
@@ -254,6 +260,7 @@ function playBeep() {
 
 
 function typeWriter() {
+    let fullText = storyLines[currentLineIndex];
     if (textIndex < fullText.length) {
         document.getElementById("story-text").innerText = fullText.slice(0, textIndex + 1);
         textIndex++;
