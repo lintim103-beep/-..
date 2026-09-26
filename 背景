@@ -189,7 +189,8 @@
 <script>
 
    function onStartClick() {
-        alert("【警報】防衛系統已開啟，進入 STATE_STORY（劇情對話狀態）...");
+    document.getElementById("menu-screen").style.display = "none";
+    document.getElementById("story-screen").style.display = "block";
 }
     function onLoadClick() {
        
