@@ -1,5 +1,4 @@
 
-<head>
     <meta charset="UTF-8">
     <title>Abyss Laboratory - Title Screen</title>
     <style>
@@ -405,6 +404,3 @@ window.addEventListener("keydown", function(event) {
 });
 
 </script>
-
-</body>
-</html>
