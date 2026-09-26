@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <title>Abyss Laboratory - Title Screen</title>
     <style>
+       #story-screen {
+         position: absolute;
+          top: 0;
+          left: 0;
+        width: 100%;
+         height: 100%;
+         padding: 40px;
+       color: #FFFFFF;
+           font-size: 20px;
+          line-height: 1.8;
+        } 
         * {
             box-sizing: border-box;
             margin: 0;
@@ -155,6 +166,52 @@
        #sound-btn {
     background-color: rgba(10, 2, 2, 0.85);
 }
+
+#scene-box {
+    width: 100%;
+    height: 300px;
+    background-color: #050b05;
+    border: 2px solid #00ff00;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+}
+.scene-tag {
+    color: #00ff00;
+    font-family: monospace;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    animation: blink 1.5s infinite; /* 文字閃爍 */
+}
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+.choice-btn {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px 20px;
+    background-color: rgba(0, 20, 0, 0.8);
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    font-family: monospace;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease-in-out;
+}
+
+.choice-btn:hover {
+    background-color: #00ff00;
+    color: #000000;
+    box-shadow: 0 0 10px #00ff00;
+}
+
     </style>
 </head>
 <body>
@@ -165,11 +222,11 @@
         <div class="title-group">
             <div class="warning-tag">▲ WARNING: BIOHAZARD CONTAINMENT BREACH ▲</div>
             <h1 class="main-title">ABYSS LABORATORY</h1>
-
-        </div>
+  </div>
+        
 
         <div class="menu-buttons">
-            <button id="sound-btn" onclick="toggleSound()"> 音效: 開</button>
+            <button id="sound-btn" class="menu-btn" onclick="toggleSound()">🔊 音效: 開</button>
             <button class="menu-btn" onclick="onStartClick()">進入遊戲</button>
             <button class="menu-btn" onclick="onLoadClick()">載入紀錄</button>
             <button class="menu-btn" onclick="onControlsClick()">操作指南</button>
@@ -180,13 +237,38 @@
             18-Week Project
         </div>
     </div>
+
+<div id="story-screen" style="display: none;" onclick="nextSentence()">
+    <!-- 1. 新增：場景畫面區域 -->
+    <div id="scene-box">
+        <span class="scene-tag">[ 區域：B3 底層廢棄實驗室 ]</span>
+    </div>
+
+    <!-- 2. 原本的對話框區域 -->
+    <p id="story-text"></p>
+</div>
+
+<!-- STATE_STORY: 劇情對話畫面 -->
+   
+<div id="story-screen" style="display: none;" onclick="nextSentence()">
+    <p id="story-text"></p>
+</div>
+
+<!-- 選項區域 -->
+<div id="choices-box" style="display: none;">
+    <button class="choice-btn" onclick="chooseOption1()">1. 搜尋附近的實驗桌</button>
+    <button class="choice-btn" onclick="chooseOption2()">2. 試著推開生鏽的鐵門</button>
+</div>
+
 </div>
 
 <script>
-   const alarmSound = new Audio("https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg");
-alarmSound.loop = true;
-   function onStartClick() {
-        alert("【警報】防衛系統已開啟，進入 STATE_STORY（劇情對話狀態）...");
+
+function onStartClick() {
+    document.getElementById("menu-screen").style.display = "none";
+    document.getElementById("story-screen").style.display = "block";
+    textIndex = 0; // 歸零
+    typeWriter();
 }
     function onLoadClick() {
        
@@ -196,12 +278,74 @@ alarmSound.loop = true;
     function onControlsClick() {
         alert("【生存指南】\nWASD - 移動\n滑鼠 - 手電筒與瞄準\n左鍵 - 射擊/互動");
     }
-   function toggleSound() {
-    alert("【音效開關】你點擊了音效按鈕！");
+let audioCtx = null;
+let isPlaying = false;
+let timer = null;
+let storyLines = [
+    "【系統紀錄】你睜開眼睛，四周是一片死寂的廢棄實驗室...",
+    "【警報系統】警告：三號隔離區生化防護已失效！",
+    "【未知聲音】『你...終於醒了嗎...？』"
+];
+let currentLineIndex = 0;
+let textIndex = 0;
+
+
+function toggleSound() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    
+    isPlaying = !isPlaying; // 切換開關狀態
+    const soundBtn = document.getElementById("sound-btn");
+    
+    if (isPlaying) {
+        // 開啟：每 0.5 秒嗶一次
+        timer = setInterval(playBeep, 500);
+        soundBtn.innerText = "🔊 音效: 開";
+    } else {
+        // 關閉：清除定時器
+        clearInterval(timer);
+        soundBtn.innerText = "🔇 音效: 關";
+    }
 }
-   function toggleSound() {
-    alarmSound.play();
+
+function playBeep() {
+    let osc = audioCtx.createOscillator();
+    let gain = audioCtx.createGain();
+    
+    osc.type = "sawtooth";
+    osc.frequency.value = 880;
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.15);
 }
+
+
+function typeWriter() {
+    let fullText = storyLines[currentLineIndex];
+    if (textIndex < fullText.length) {
+        document.getElementById("story-text").innerText = fullText.slice(0, textIndex + 1);
+        textIndex++;
+        setTimeout(typeWriter, 100);
+    }
+}
+
+function nextSentence() {
+    if (currentLineIndex < storyLines.length - 1) {
+        currentLineIndex++;
+        textIndex = 0;
+        document.getElementById("story-text").innerText = "";
+        typeWriter();
+    } else {
+        // 當劇情已經到最後一句時，顯示抉擇選項！
+        document.getElementById("choices-box").style.display = "block";
+    }
+}
+
+</script>
 
 </body>
 </html>
